@@ -29,15 +29,15 @@ def meteo():
     return jsonify(results=results)
   
 @app.route("/rapport/")
-def mongraphique():
+def mongraphique1():
     return render_template("graphique.html")
   
 @app.route("/contact/")
-def mongraphique():
+def mongraphique2():
     return render_template("contact.html")
 
 @app.route("/histogramme/")
-def mongraphique():
+def mongraphique3():
     return render_template("histogramme.html")
   
 if __name__ == "__main__":
