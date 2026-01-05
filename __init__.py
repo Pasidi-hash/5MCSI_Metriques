@@ -39,6 +39,10 @@ def mongraphique2():
 @app.route("/histogramme/")
 def mongraphique3():
     return render_template("histogramme.html")
+
+@app.route("/comits/")
+def mongraphique4():
+    return render_template("comits.html")
   
 if __name__ == "__main__":
   app.run(debug=True)
