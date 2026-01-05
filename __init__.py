@@ -7,9 +7,10 @@ import sqlite3
                                                                                                                                        
 app = Flask(__name__)#comm  
 
-@app.route("/contact/")
-def MaPremiereAPI():
-    return "<h2>Ma page de contact</h2>"
+#@app.route("/contact/")
+#def MaPremiereAPI():
+#    return "<h2>Ma page de contact</h2>"
+
   
 @app.route('/')
 def hello_world():
@@ -30,8 +31,12 @@ def meteo():
 @app.route("/rapport/")
 def mongraphique():
     return render_template("graphique.html")
+  
+@app.route("/contact/")
+def mongraphique():
+    return render_template("contact.html")
 
-@app.route("/histo/")
+@app.route("/histogramme/")
 def mongraphique():
     return render_template("histogramme.html")
   
