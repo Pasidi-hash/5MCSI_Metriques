@@ -1,1 +1,48 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Metrique - Histogramme</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  </head>
+  <body>
+    <div id="chart_div" style="width: 100%; height: 500px;"></div>
+    <script>
+      google.charts.load('current', { packages: ['corechart'] });
+      google.charts.setOnLoadCallback(fetchData);
 
+      function fetchData() {
+        // Récupération de données depuis votre API
+        fetch('/tawarano/')
+          .then(response => response.json())
+          .then(data => {
+            drawChart(data);
+          })
+          .catch(error => console.error('Erreur :', error));
+      }
+
+      function drawChart(data) {
+        var dataTable = new google.visualization.DataTable();
+        dataTable.addColumn('string', 'Date');
+        dataTable.addColumn('number', 'Température');
+
+        data.results.forEach(entry => {
+          var date = new Date(entry.Jour * 1000);
+          dataTable.addRow([date.toLocaleDateString(), entry.temp]);
+        });
+
+        var options = {
+          title: 'Évolution des températures de la ville de Tawarano',
+          legend: { position: 'bottom' },
+          // Options spécifiques aux barres
+          bar: { groupWidth: "75%" },
+          hAxis: { title: 'Date' },
+          vAxis: { title: 'Degrés Celsius' }
+        };
+
+        // Utilisation de ColumnChart pour l'effet "Histogramme/Barres"
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+        chart.draw(dataTable, options);
+      }
+    </script>
+  </body>
+</html>
